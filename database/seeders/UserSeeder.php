@@ -27,13 +27,13 @@ class UserSeeder extends Seeder
                 'name' => 'manager',
                 'email' => 'manager@manager.manager',
                 'password' => Hash::make('password'),
-                'role' => UserConst::MANAGER_ROLE_LOWER,
+                'role' => UserConst::MANAGER_ROLE,
             ],
             [
                 'name' => 'user',
                 'email' => 'user@user.user',
                 'password' => Hash::make('password'),
-                'role' => UserConst::USER_ROLE_LOWER,
+                'role' => UserConst::USER_ROLE_UPPER,
             ],
         ]);
     }
