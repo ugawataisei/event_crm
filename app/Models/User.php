@@ -7,11 +7,13 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -27,39 +29,46 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @property Collection|Reservation[] $reservations
+ *
  * @package App\Models
  */
 class User extends Model
 {
-	protected $table = 'users';
+    protected $table = 'users';
 
-	protected $casts = [
-		'role' => 'int',
-		'current_team_id' => 'int'
-	];
+    protected $casts = [
+        'role' => 'int',
+        'current_team_id' => 'int'
+    ];
 
-	protected $dates = [
-		'email_verified_at',
-		'two_factor_confirmed_at'
-	];
+    protected $dates = [
+        'email_verified_at',
+        'two_factor_confirmed_at'
+    ];
 
-	protected $hidden = [
-		'password',
-		'two_factor_secret',
-		'remember_token'
-	];
+    protected $hidden = [
+        'password',
+        'two_factor_secret',
+        'remember_token'
+    ];
 
-	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'two_factor_secret',
-		'two_factor_recovery_codes',
-		'two_factor_confirmed_at',
-		'remember_token',
-		'role',
-		'current_team_id',
-		'profile_photo_path'
-	];
+    protected $fillable = [
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
+        'remember_token',
+        'role',
+        'current_team_id',
+        'profile_photo_path'
+    ];
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
