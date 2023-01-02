@@ -26,3 +26,12 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::middleware('can:admin')->prefix('admin')->group(function () {
+});
+
+Route::middleware('can:manager')->prefix('manager')->group(function () {
+});
+
+Route::middleware('can:user')->prefix('user')->group(function () {
+});
