@@ -47,7 +47,7 @@ use App\Models\Event;
                                     {{ $model->id }}
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{ $model->name }}
+                                    <a href="{{ route('manager.event.show', ['id' => $model->id ]) }}">{{ $model->name }}</a>
                                 </td>
                                 <td class="py-4 px-6">
                                     {{ $model->start_date }}
@@ -59,7 +59,7 @@ use App\Models\Event;
                                     {!! $model->returnStatusWithBadge() !!}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ 'actions' }}
+                                    {{ 'delete operation' }}
                                 </td>
                             </tr>
                         @endforeach

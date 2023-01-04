@@ -2,6 +2,7 @@
 
 return [
     'title' => 'イベント管理',
+    'show_title' => 'イベント詳細',
     'attribute_labels' => [
         'id' => 'ID',
         'name' => 'イベント名',
