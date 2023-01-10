@@ -4,27 +4,37 @@ namespace App\Http\Actions\Manager\Event;
 
 use App\Consts\EventConst;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Manager\Event\EventUpdateRequest;
 use App\Models\Event;
 use Carbon\Carbon;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class EventUpdateAction extends Controller
 {
     /**
      *
-     * @param Request $request
-     * @return View
+     * @param EventUpdateRequest $request
+     * @return RedirectResponse
      */
-    public function __invoke(Request $request): View
+    public function __invoke(EventUpdateRequest $request): RedirectResponse
     {
-        dd($request);
-        /** @var Collection $models */
-        $models = Event::query()->where('is_visible', EventConst::STATUS_DISPLAY)
-            ->whereDate('start_date', '>', Carbon::now('Asia/Tokyo'))
-            ->get();
+        $startDate = $request->get('event_date') . ' ' . $request->get('start_time');
+        $endDate = $request->get('event_date') . ' ' . $request->get('end_time');
 
-        return view('manager.event.index', compact('models'));
+        /** @var Event $model */
+        Event::query()->findOrFail((int)$request->get('id'))
+            ->fill([
+                'name' => $request->get('name'),
+                'information' => $request->get('information'),
+                'start_time' => Carbon::parse($startDate),
+                'end_date' => Carbon::parse($endDate),
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[(int)$request->get('max_people')],
+                'is_visible' => $request->get('is_visible'),
+            ])->save();
+
+        return redirect()->route('manager.event.edit', ['id' => $request->get('id')])->with([
+            'status' => 'info',
+            'message' => '',
+        ]);
     }
 }

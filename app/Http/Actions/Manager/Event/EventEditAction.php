@@ -21,7 +21,8 @@ class EventEditAction
 
         $viewParams = [
             'model' => $model,
-            'oldKey' => array_search($model->max_people, EventConst::MAX_PEOPLE_OPTION),
+            'oldMaxPeopleKey' => array_search($model->max_people, EventConst::MAX_PEOPLE_OPTION),
+            'oldIsVisibleKey' => $model->is_visible,
             'event_date' => $model->start_date->format('Y年m月d日'),
             'start_time' => $model->start_date->format('H時m分'),
             'end_time' => $model->end_date->format('H時m分'),

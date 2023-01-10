@@ -4,7 +4,8 @@ use App\Models\Event;
 use App\Consts\EventConst;
 
 /** @var Event $model */
-/** @var int $oldKey */
+/** @var int $oldMaxPeopleKey */
+/** @var int $oldIsVisibleKey */
 /** @var string $event_date */
 /** @var string $start_time */
 /** @var string $end_time */
@@ -36,7 +37,7 @@ use App\Consts\EventConst;
                         </div>
                         <div class="mb-2">
                             {{ Form::label('information', __('event.attribute_labels.information'), ['class' => 'form-label']) }}
-                            {{ Form::textarea('information', nl2br($model->information), ['class' => 'form-control', 'rows' => '3']) }}
+                            {!! Form::textarea('information', nl2br($model->information), ['class' => 'form-control', 'rows' => '3']) !!}
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-4">
@@ -54,16 +55,20 @@ use App\Consts\EventConst;
                         </div>
                         <div class="mb-2">
                             {{ Form::label('max_people', __('event.attribute_labels.max_people'), ['class' => 'form-label']) }}
-                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $oldKey,['class' => 'form-control']) }}
+                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $oldMaxPeopleKey,['class' => 'form-control']) }}
+                        </div>
+                        <div class="mb-2">
+                            {{ Form::label('is_visible', __('event.attribute_labels.is_visible'), ['class' => 'form-label']) }}
+                            {{ Form::select('is_visible', EventConst::EVENT_STATUS, $oldIsVisibleKey,['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-info" type="button"
+                        <button class="btn btn-secondary" type="button"
                                 onclick="location.href='{{ route('manager.event.show', ['id' => $model->id]) }}'">
-                            {{ __('message.btn_labels.back') }}
+                            <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
                         </button>
                         <button class="btn btn-success" type="submit">
-                            {{ __('message.btn_labels.update') }}
+                            <i class="fa-solid fa-paper-plane"></i>{{ __('message.btn_labels.update') }}
                         </button>
                         {{ Form::close() }}
                     </div>
