@@ -8,6 +8,8 @@ return [
     'btn_labels' => [
         'list' => '一覧',
         'edit' => '編集',
+        'update' => '更新',
+        'back' => '戻る',
         'reservation' => '予約',
     ],
 ];

@@ -3,6 +3,7 @@
 return [
     'title' => 'イベント管理',
     'show_title' => 'イベント詳細',
+    'edit_title' => 'イベント編集',
     'attribute_labels' => [
         'id' => 'ID',
         'name' => 'イベント名',
@@ -13,5 +14,6 @@ return [
         'is_visible' => '表示・非表示',
         'created_at' => '作成日',
         'updated_at' => '更新日',
+        'event_date' => 'イベント日付',
     ],
 ];

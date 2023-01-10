@@ -33,6 +33,8 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
 Route::middleware('can:manager')->prefix('manager')->group(function () {
     Route::get('event/index', \App\Http\Actions\Manager\Event\EventIndexAction::class)->name('manager.event.index');
     Route::get('event/show/{id}', \App\Http\Actions\Manager\Event\EventShowAction::class)->name('manager.event.show');
+    Route::get('event/edit/{id}', \App\Http\Actions\Manager\Event\EventEditAction::class)->name('manager.event.edit');
+    Route::post('event/update', \App\Http\Actions\Manager\Event\EventUpdateAction::class)->name('manager.event.update');
 });
 
 Route::middleware('can:user')->prefix('user')->group(function () {

@@ -11,11 +11,11 @@ const time_option = {
     maxTime: "21:00",
 }
 
-flatpickr("event_date", {
+flatpickr("#event_date", {
     "locale": Japanese, // locale for this instance only
     minDate: "today", maxDate: new Date().fp_incr(30)
 });
 
-flatpickr("start_time", time_option);
+flatpickr("#start_time", time_option);
 
-flatpickr("end_time", time_option);
+flatpickr("#end_time", time_option);

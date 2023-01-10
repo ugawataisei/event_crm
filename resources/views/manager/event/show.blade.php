@@ -72,7 +72,7 @@ use Illuminate\Database\Eloquent\Collection;
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2">
                         <i class="fa-solid fa-list"></i>{{ __('message.btn_labels.list') }}
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="location.href='{{ route('manager.event.edit', ['id' => $model->id]) }}'"
                             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2">
                         <i class="fa-solid fa-pen"></i>{{ __('message.btn_labels.edit') }}
                     </button>
