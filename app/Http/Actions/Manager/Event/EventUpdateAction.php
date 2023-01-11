@@ -34,7 +34,7 @@ class EventUpdateAction extends Controller
 
         return redirect()->route('manager.event.edit', ['id' => $request->get('id')])->with([
             'status' => 'info',
-            'message' => '',
+            'message' => trans('message.common.success_update'),
         ]);
     }
 }

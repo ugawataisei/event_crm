@@ -34,6 +34,16 @@ class EventUpdateRequest extends FormRequest
             'is_visible' => 'required|boolean',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return __('event.attribute_labels');
+    }
 }
 
 

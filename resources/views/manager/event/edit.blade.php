@@ -26,6 +26,11 @@ use App\Consts\EventConst;
                         {{ __('event.edit_title') }}
                     </div>
                     <div class="card-body">
+
+                        @include('components.flash-message')
+
+                        @include('components.validation-error')
+
                         {{ Form::open(['route' => 'manager.event.update', 'method' => 'post']) }}
                         @csrf
 
