@@ -76,12 +76,16 @@ use Illuminate\Database\Eloquent\Collection;
                             class="btn btn-success">
                         <i class="fa-solid fa-pen"></i>{{ __('message.btn_labels.edit') }}
                     </button>
-                    <button type="button" onclick="location.href='{{ route('manager.event.edit', ['id' => $model->id]) }}'"
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#delete{{ $model->id }}"
                             class="btn btn-danger">
-                        <i class="fa-solid fa-pen"></i>{{ __('message.btn_labels.delete') }}
+                        <i class="fa-solid fa-trash"></i>{{ __('message.btn_labels.delete') }}
                     </button>
                 </div>
             </div>
+
+            @include('components.delete-modal', [
+                'title' => __('event.delete_title'),
+            ])
 
             <div class="card mt-5">
                 <div class="card-header text-gray-500 font-bold">

@@ -37,6 +37,7 @@ Route::middleware('can:manager')->prefix('manager')->group(function () {
     Route::get('event/edit/{id}', \App\Http\Actions\Manager\Event\EventEditAction::class)->name('manager.event.edit');
     Route::post('event/update', \App\Http\Actions\Manager\Event\EventUpdateAction::class)->name('manager.event.update');
     Route::post('event/store', \App\Http\Actions\Manager\Event\EventStoreAction::class)->name('manager.event.store');
+    Route::post('event/delete', \App\Http\Actions\Manager\Event\EventDeleteAction::class)->name('manager.event.delete');
 });
 
 Route::middleware('can:user')->prefix('user')->group(function () {

@@ -5,6 +5,7 @@ return [
     'show_title' => 'イベント詳細',
     'edit_title' => 'イベント編集',
     'create_title' => 'イベント作成',
+    'delete_title' => 'イベント削除',
     'attribute_labels' => [
         'id' => 'ID',
         'name' => 'イベント名',

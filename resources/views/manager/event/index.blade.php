@@ -18,6 +18,8 @@ use App\Models\Event;
         </div>
     </x-slot>
 
+    @include('components.flash-message')
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -65,11 +67,16 @@ use App\Models\Event;
                                     {!! $model->returnStatusWithBadge() !!}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <button class="btn btn-sm btn-danger">
-                                        {{ __('message.btn_labels.delete') }}
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $model->id }}">
+                                        <i class="fa-solid fa-trash"></i>{{ __('message.btn_labels.delete') }}
                                     </button>
                                 </td>
                             </tr>
+
+                            @include('components.delete-modal', [
+                                'title' => __('event.delete_title'),
+                            ])
+
                         @endforeach
                         </tbody>
                     </table>
