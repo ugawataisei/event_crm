@@ -2,18 +2,21 @@
 
 namespace App\Http\Actions\Manager\Event;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Consts\EventConst;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
-class EventEditAction
+class EventEditAction extends Controller
 {
     /**
      *
+     * @param Request $request
      * @param int $id
      * @return View
      */
-    public function __invoke(int $id): View
+    public function __invoke(Request $request, int $id): View
     {
         /** @var Event $model */
         $model = Event::query()

@@ -2,19 +2,22 @@
 
 namespace App\Http\Actions\Manager\Event;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
-class EventShowAction
+class EventShowAction extends Controller
 {
     /**
      *
+     * @param Request $request
      * @param int $id
      * @return View
      */
-    public function __invoke(int $id): View
+    public function __invoke(Request $request, int $id): View
     {
         /** @var Event $model */
         $model = Event::query()->findOrFail($id);

@@ -7,9 +7,15 @@ use App\Models\Event;
 ?>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('event.title') }}
-        </h2>
+        <div class="row">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight col-md-4">
+                {{ __('event.title') }}
+            </h2>
+            <button type="button" onclick="location.href='{{ route('manager.event.create') }}'"
+                    class="btn btn-primary col-md-1 offset-md-7">
+                <i class="fa-solid fa-plus"></i>{{ __('message.btn_labels.create') }}
+            </button>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -59,7 +65,9 @@ use App\Models\Event;
                                     {!! $model->returnStatusWithBadge() !!}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ 'delete operation' }}
+                                    <button class="btn btn-sm btn-danger">
+                                        {{ __('message.btn_labels.delete') }}
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

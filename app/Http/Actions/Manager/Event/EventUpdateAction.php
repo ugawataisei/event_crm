@@ -26,7 +26,7 @@ class EventUpdateAction extends Controller
             ->fill([
                 'name' => $request->get('name'),
                 'information' => $request->get('information'),
-                'start_time' => Carbon::parse($startDate),
+                'start_date' => Carbon::parse($startDate),
                 'end_date' => Carbon::parse($endDate),
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[(int)$request->get('max_people')],
                 'is_visible' => $request->get('is_visible'),
