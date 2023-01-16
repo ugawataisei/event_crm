@@ -14,7 +14,7 @@ use App\Consts\EventConst;
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="card">
-                    <div class="card-header text-muted">
+                    <div class="card-header text-muted font-bold">
                         {{ __('event.create_title') }}
                     </div>
                     <div class="card-body">
@@ -62,8 +62,8 @@ use App\Consts\EventConst;
                         <button class="btn btn-secondary" type="button" onclick="location.href='{{ route('manager.event.index') }}'">
                             <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
                         </button>
-                        <button class="btn btn-info" type="submit">
-                            <i class="fa-solid fa-paper-plane"></i>{{ __('message.btn_labels.store') }}
+                        <button class="btn btn-info text-white" type="submit">
+                            <i class="fa-solid fa-plus"></i>{{ __('message.btn_labels.store') }}
                         </button>
                         {{ Form::close() }}
                     </div>

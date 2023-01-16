@@ -6,6 +6,7 @@ return [
         'no_reservation_information_yet' => '予約情報がまだありません',
         'success_update' => '更新しました',
         'success_store' => '保存しました',
+        'success_reservation' => '予約しました',
         'success_delete' => '削除しました',
         'error_actions' => '処理に失敗しました'
     ],

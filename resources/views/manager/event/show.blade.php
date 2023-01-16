@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Collection;
 
 /** @var Event $model */
+/** @var Reservation $reservation */
 /** @var Collection $reservations */
 
 ?>
@@ -118,7 +120,7 @@ use Illuminate\Database\Eloquent\Collection;
                                             {{ $reservation->number_of_people }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $model->created_at->format('Y年m月d日 h:m') }}
+                                            {{ $reservation->created_at->format('Y年m月d日 h:m') }}
                                         </td>
                                     </tr>
                                 @else
@@ -134,7 +136,7 @@ use Illuminate\Database\Eloquent\Collection;
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <button type="button"
+                    <button type="button" onclick="location.href='{{ route('user.reservation.create', ['event_id' => $model->id]) }}'"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2">
                         <i class="fa-regular fa-id-card"></i>{{ __('message.btn_labels.reservation') }}
                     </button>

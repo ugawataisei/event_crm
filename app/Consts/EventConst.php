@@ -16,4 +16,6 @@ class EventConst
     ];
 
     public const MAX_PEOPLE_OPTION = [10, 20, 30, 40, 50];
+
+    public const MAX_PEOPLE_RESERVATION = 10;
 }
