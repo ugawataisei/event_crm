@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
             $table->integer('number_of_people');
-            $table->dateTime('canceled_date');
+            $table->dateTime('canceled_date')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
