@@ -9,16 +9,19 @@
 
 ## Append Composer Package
 
-- [laravel/jetstream](https://jetstream.laravel.com/2.x/introduction.html).
-- [laravel/fortify](https://readouble.com/laravel/8.x/ja/fortify.html).
-- [livewire/livewire]()
-- [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar).
+- [laravel/jetstream](https://jetstream.laravel.com/2.x/introduction.html)
+- [laravel/fortify](https://readouble.com/laravel/8.x/ja/fortify.html)
+- [livewire/livewire](https://laravel-livewire.com/)
+- [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
 - [laravelcollective/html](https://laravelcollective.com/)
-- [reliese/laravel]()
+- [reliese/laravel](https://github.com/reliese/laravel)
 
 ## Append NodeModule Package
 
-- [alpinejs]()
+- [flowbite](https://flowbite.com/docs/getting-started/introduction/)
+- [alpinejs](https://alpinejs.dev/)
+- [jquery](https://jquery.com/)
+- [flatpickr](https://flatpickr.js.org/)
 
 ## Develop Environment
 
@@ -96,12 +99,22 @@ php artisan migrate:refresh --seed
 php artisan serve #start php server
 ```
 
-login
+role ['admin', 'manager', 'user']
 
 ```php
 #admin
-url : 'app-url/admin/login'
+url : 'app-url/login/'
 user : admin@admin.admin
+pass : password
+
+#manager
+url : 'app-url/login/'
+user : manager@manager.manager
+pass : password
+
+#user
+url : 'app-url/login/'
+user : user@user.user
 pass : password
 
 ```

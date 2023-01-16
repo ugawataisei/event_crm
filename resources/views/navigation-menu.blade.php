@@ -16,6 +16,15 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+
+                @can('manager')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('manager.event.index') }}" :active="request()->routeIs('manager.event.index')">
+                            {{ __('event.title') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -141,6 +150,14 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
+
+        @can('manager')
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-jet-nav-link href="{{ route('manager.event.index') }}" :active="request()->routeIs('manager.event.index')">
+                    {{ __('event.title') }}
+                </x-jet-nav-link>
+            </div>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\Consts\EventConst;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -51,8 +52,25 @@ class Event extends Model
         'is_visible'
     ];
 
+    /**
+     * relations
+     */
+
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * public functions
+     */
+
+    public function returnStatusWithBadge(): string
+    {
+        if ((int)$this->is_visible === EventConst::STATUS_DISPLAY) {
+            return '<span class="badge bg-primary">' . EventConst::MB_STATUS_DISPLAY . '</span>';
+        } else {
+            return '<span class="badge bg-secondary">' . EventConst::MB_STATUS_DISPLAY . '</span>';
+        }
     }
 }

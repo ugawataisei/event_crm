@@ -7,11 +7,15 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- CDN -->
+        <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+        <script src="https://kit.fontawesome.com/11bead58f7.js" crossorigin="anonymous"></script>
+
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/sass/app.scss',  'resources/js/app.js', 'resources/js/common/flatpickr.js'])
 
         <!-- Styles -->
         @livewireStyles
