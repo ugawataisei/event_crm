@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Console\Scheduling\Event;
+use App\Models\Event;
+use App\Models\Reservation;
 
-/** @var Event $model */
+/** @var Event|Reservation $model */
 /** @var string $title */
+/** @var string $route */
 
 ?>
 <div class="modal fade" id="delete{{ $model->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -19,7 +21,7 @@ use Illuminate\Console\Scheduling\Event;
                 </div>
             </div>
             <div class="modal-footer">
-                {{ Form::open(['route' => 'manager.event.delete', 'method' => 'post']) }}
+                {{ Form::open(['route' => $route, 'method' => 'post']) }}
                 @method('POST')
                 @csrf
 

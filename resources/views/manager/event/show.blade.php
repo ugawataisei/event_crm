@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Collection;
                 </div>
                 <div class="card-body">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+                        @include('components.flash-message')
+
                         <table class="w-full text-sm text-left text-gray-500">
                             <tr class="border-b border-gray-200">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
@@ -87,6 +90,7 @@ use Illuminate\Database\Eloquent\Collection;
 
             @include('components.delete-modal', [
                 'title' => __('event.delete_title'),
+                'route' => 'manager.event.delete',
             ])
 
             <div class="card mt-5">

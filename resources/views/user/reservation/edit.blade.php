@@ -74,8 +74,18 @@ use App\Models\Reservation;
                         <button class="btn btn-success text-white" type="submit">
                             <i class="fa-solid fa-pen"></i>{{ __('message.btn_labels.edit') }}
                         </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $model->id }}">
+                            <i class="fa-solid fa-trash"></i>{{ __('message.btn_labels.delete') }}
+                        </button>
                         {{ Form::close() }}
                     </div>
+
+                    @include('components.delete-modal', [
+                        'title' => __('reservation.delete_title'),
+                        'route' => 'user.reservation.delete',
+                        'model' => $reservation,
+                    ])
+
                 </div>
             </div>
         </div>

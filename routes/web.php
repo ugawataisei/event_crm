@@ -44,4 +44,5 @@ Route::middleware('can:user')->prefix('user')->group(function () {
     Route::get('reservation/create/{event_id}', \App\Http\Actions\User\Reservation\ReservationCreateAction::class)->name('user.reservation.create');
     Route::post('reservation/store', \App\Http\Actions\User\Reservation\ReservationStoreAction::class)->name('user.reservation.store');
     Route::post('reservation/update', \App\Http\Actions\User\Reservation\ReservationUpdateAction::class)->name('user.reservation.update');
+    Route::post('reservation/delete', \App\Http\Actions\User\Reservation\ReservationDeleteAction::class)->name('user.reservation.delete');
 });

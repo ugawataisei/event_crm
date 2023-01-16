@@ -75,6 +75,7 @@ use App\Models\Event;
 
                             @include('components.delete-modal', [
                                 'title' => __('event.delete_title'),
+                                'route' => 'manager.event.delete',
                             ])
 
                         @endforeach

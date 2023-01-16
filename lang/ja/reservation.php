@@ -5,6 +5,7 @@ return [
     'show_title' => '予約一覧',
     'create_title' => '予約作成',
     'edit_title' => '予約編集',
+    'delete_title' => '予約削除',
     'attribute_labels' => [
         'id' => 'ID',
         'user_id' => 'ユーザーID',
