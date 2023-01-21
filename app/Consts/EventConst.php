@@ -18,4 +18,6 @@ class EventConst
     public const MAX_PEOPLE_OPTION = [10, 20, 30, 40, 50];
 
     public const MAX_PEOPLE_RESERVATION = 10;
+
+    public const AMOUNT_DAYS_IN_ONE_WEEK = 7;
 }
