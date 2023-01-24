@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class Calendar extends Component
 {
     public Carbon $selectedDate;
-    public array $oneWeekForSelectedDate;
+    public array $dayInfoForOneWeekList;
     public Collection $selectedDateReEvents;
     protected EventService $eventService;
 
@@ -22,7 +22,7 @@ class Calendar extends Component
         $this->selectedDate = Carbon::today();
         $this->eventService = $eventService;
 
-        $this->oneWeekForSelectedDate = $eventService->returnDaysForOneWeekToSelect($this->selectedDate);
+        $this->dayInfoForOneWeekList = $eventService->returnDayInfoForOneWeekToSelect($this->selectedDate);
         $this->selectedDateReEvents = $eventService->returnReEventsToSelect($this->selectedDate);
     }
 
@@ -31,7 +31,7 @@ class Calendar extends Component
         $this->selectedDate = Carbon::parse($selectedDate);
         $this->eventService = $eventService;
 
-        $this->oneWeekForSelectedDate = $eventService->returnDaysForOneWeekToSelect($this->selectedDate);
+        $this->dayInfoForOneWeekList = $eventService->returnDayInfoForOneWeekToSelect($this->selectedDate);
         $this->selectedDateReEvents = $eventService->returnReEventsToSelect($this->selectedDate);
     }
 

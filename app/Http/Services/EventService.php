@@ -12,16 +12,30 @@ use Illuminate\Support\Facades\DB;
 
 class EventService
 {
-    public function returnDaysForOneWeekToSelect(Carbon $selectedDate): array
+    /**
+     *
+     * @param Carbon $selectedDate
+     * @return array
+     */
+    public function returnDayInfoForOneWeekToSelect(Carbon $selectedDate): array
     {
-        $oneWeekForSelectedDate = [];
+        $dayInfoForOneWeekList = [];
         for ($i = 0; $i < EventConst::AMOUNT_DAYS_IN_ONE_WEEK; $i++) {
-            $oneWeekForSelectedDate[] = $selectedDate->copy()
+            $dayInfoForOneWeekList['day'][] = $selectedDate->copy()
                 ->addDays($i)->format('m月d日');
+            $dayInfoForOneWeekList['day_name'][] = $selectedDate->copy()
+                ->addDays($i)->dayName;
+            $dayInfoForOneWeekList['day_string'][] = $selectedDate->copy()
+                ->addDays($i)->format('Y-m-d');
         }
-        return $oneWeekForSelectedDate;
+        return $dayInfoForOneWeekList;
     }
 
+    /**
+     *
+     * @param Carbon $selectedDate
+     * @return Collection
+     */
     public function returnReEventsToSelect(Carbon $selectedDate): Collection
     {
         /** @var Builder $reservations */

@@ -1,8 +1,13 @@
 <?php
 
 use App\Models\Event;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 /** @var Event $event */
+/** @var Carbon $selectedDate */
+/** @var array $dayInfoForOneWeekList */
+/** @var Collection $selectedDateReEvents */
 
 ?>
 <div class="card">
@@ -16,20 +21,16 @@ use App\Models\Event;
             </label>
         </div>
         <div class="col-md-3">
-            {{--  select to date  --}}
             <input type="text" id="calendar" name="selected_date" class="form-control"
                    value="{{ $selectedDate }}"
                    wire:change="returnOneWeekForSelectedDate($event.target.value)">
-            {{--  Calendar  --}}
-            <div class="flex">
-                @foreach($oneWeekForSelectedDate as $date)
-                    {{ $date }}
-                @endforeach
-            </div>
-            <div class="flex">
-                @foreach($selectedDateReEvents as $event)
-                    {{ $event->name }}
-                @endforeach
+            <div class="flex pt-5">
+                @include('components.calendar.columns')
+
+                @include('components.calendar.rows', [
+                    'day_info' => $dayInfoForOneWeekList,
+                    'event_list' => $selectedDateReEvents,
+                ])
             </div>
         </div>
         <div class="col-md-7"></div>
