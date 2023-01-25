@@ -20,5 +20,8 @@ return [
         'back' => '戻る',
         'close' => '閉じる',
         'reservation' => '予約',
+        'login' => 'ログイン',
+        'register' => '登録',
+        'dashboard' => 'ダッシュボード'
     ],
 ];

@@ -5,9 +5,12 @@ namespace Database\Seeders;
 use App\Consts\EventConst;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\CarbonImmutable;
 
 class DevEventSeeder extends Seeder
 {
+    public CarbonImmutable $today;
+
     /**
      * Run the database seeds.
      *
@@ -15,45 +18,63 @@ class DevEventSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->today = CarbonImmutable::today();
+
         DB::table('events')->insert([
             [
-                'name' => 'テストイベント1',
+                'name' => 'event1',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
-                'max_people' => 50,
-                'start_date' => '2024-01-01 00:00:00',
-                'end_date' => '2024-01-01 12:00:00',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[0],
+                'start_date' => $this->today->addHours(10),
+                'end_date' => $this->today->addHours(13),
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント2',
+                'name' => 'event2',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
-                'max_people' => 50,
-                'start_date' => '2024-01-05 00:00:00',
-                'end_date' => '2024-01-05 12:00:00',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[1],
+                'start_date' => $this->today->addDays(1)->addHours(12),
+                'end_date' => $this->today->addDays(1)->addHours(15),
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント3',
+                'name' => 'event3',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
-                'max_people' => 50,
-                'start_date' => '2024-01-06 00:00:00',
-                'end_date' => '2024-01-06 12:00:00',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[2],
+                'start_date' => $this->today->addDays(2)->addHours(10),
+                'end_date' => $this->today->addDays(2)->addHours(11),
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント4',
+                'name' => 'event4',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
-                'max_people' => 50,
-                'start_date' => '2024-01-07 00:00:00',
-                'end_date' => '2024-01-07 12:00:00',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
+                'start_date' => $this->today->addDays(3)->addHours(11),
+                'end_date' => $this->today->addDays(3)->addHours(14),
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント5',
+                'name' => 'event5',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
-                'max_people' => 50,
-                'start_date' => '2024-01-08 00:00:00',
-                'end_date' => '2024-01-08 12:00:00',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[1],
+                'start_date' => $this->today->addDays(4)->addHours(10),
+                'end_date' => $this->today->addDays(4)->addHours(13),
+                'is_visible' => EventConst::STATUS_DISPLAY,
+            ],
+            [
+                'name' => 'event6',
+                'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
+                'start_date' => $this->today->addDays(6)->addHours(15),
+                'end_date' => $this->today->addDays(6)->addHours(18),
+                'is_visible' => EventConst::STATUS_DISPLAY,
+            ],
+            [
+                'name' => 'event7',
+                'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
+                'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
+                'start_date' => $this->today->addDays(8)->addHours(9),
+                'end_date' => $this->today->addDays(8)->addHours(13),
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
         ]);
