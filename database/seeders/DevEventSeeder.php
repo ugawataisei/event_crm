@@ -22,7 +22,7 @@ class DevEventSeeder extends Seeder
 
         DB::table('events')->insert([
             [
-                'name' => 'テストイベント1',
+                'name' => 'event1',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[0],
                 'start_date' => $this->today->addHours(10),
@@ -30,7 +30,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント2',
+                'name' => 'event2',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[1],
                 'start_date' => $this->today->addDays(1)->addHours(12),
@@ -38,7 +38,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント3',
+                'name' => 'event3',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[2],
                 'start_date' => $this->today->addDays(2)->addHours(10),
@@ -46,7 +46,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント4',
+                'name' => 'event4',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
                 'start_date' => $this->today->addDays(3)->addHours(11),
@@ -54,7 +54,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント5',
+                'name' => 'event5',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[1],
                 'start_date' => $this->today->addDays(4)->addHours(10),
@@ -62,7 +62,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント6',
+                'name' => 'event6',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
                 'start_date' => $this->today->addDays(6)->addHours(15),
@@ -70,7 +70,7 @@ class DevEventSeeder extends Seeder
                 'is_visible' => EventConst::STATUS_DISPLAY,
             ],
             [
-                'name' => 'テストイベント7',
+                'name' => 'event7',
                 'information' => 'イベント情報がここに入ります。イベント情報がここに入ります。イベント情報がここに入ります。',
                 'max_people' => EventConst::MAX_PEOPLE_OPTION[3],
                 'start_date' => $this->today->addDays(8)->addHours(9),
