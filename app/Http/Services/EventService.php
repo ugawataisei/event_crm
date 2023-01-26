@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Consts\EventConst;
+use App\Http\Services\Impl\EventServiceInterface;
 use App\Models\Event;
 use App\Models\Reservation;
 use Carbon\Carbon;
@@ -10,7 +11,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
-class EventService
+class EventService implements EventServiceInterface
 {
     /**
      *
@@ -49,5 +50,15 @@ class EventService
         })->whereBetween('start_date', [$selectedDate, $addSevenDaysDate])
             ->orderBy('start_date', 'asc')
             ->get();
+    }
+
+    /**
+     *
+     * @param Event $model
+     * @return int
+     */
+    public function returnNumOfPeople(Event $model): int
+    {
+        return 0;
     }
 }

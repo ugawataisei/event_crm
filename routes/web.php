@@ -40,6 +40,7 @@ Route::middleware('can:manager')->prefix('manager')->group(function () {
 
 //ユーザー権限以上
 Route::middleware('can:user')->prefix('user')->group(function () {
+    Route::get('event/show/{id}', \App\Http\Actions\User\Event\EventShowAction::class)->name('user.event.show');
     Route::get('reservation/create/{event_id}', \App\Http\Actions\User\Reservation\ReservationCreateAction::class)->name('user.reservation.create');
     Route::post('reservation/store', \App\Http\Actions\User\Reservation\ReservationStoreAction::class)->name('user.reservation.store');
     Route::post('reservation/update', \App\Http\Actions\User\Reservation\ReservationUpdateAction::class)->name('user.reservation.update');
