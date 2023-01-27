@@ -55,10 +55,25 @@ class EventService implements EventServiceInterface
     /**
      *
      * @param Event $model
-     * @return int
+     * @return null|int
      */
-    public function returnNumOfPeople(Event $model): int
+    public function returnAvailableReservedEventPeople(Event $model): null|int
     {
-        return 0;
+        /** @var int $reservedEventPeople */
+        $reservedEventPeople = Reservation::query()
+            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
+            ->groupBy('event_id')
+            ->having('event_id', $model->id)
+            ->first();
+
+        if ($reservedEventPeople) {
+            return $model->max_people;
+        }
+
+        if ($model->max_people <= $reservedEventPeople) {
+            return null;
+        }
+
+        return $model->max_people - $reservedEventPeople;
     }
 }

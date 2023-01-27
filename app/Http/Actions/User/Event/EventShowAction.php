@@ -39,7 +39,7 @@ class EventShowAction extends Controller
         $viewParams = [
             'model' => $model,
             'reservations' => $reservations,
-            'num_of_people' => $this->eventService->returnNumOfPeople($model)
+            'available_reserved_event_people' => $this->eventService->returnAvailableReservedEventPeople($model)
         ];
 
         return view('user.event.show', $viewParams);

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 /** @var Event $model */
 /** @var Collection $reservations */
+/** @var null|int $available_reserved_event_people */
 
 ?>
 <x-app-layout>
@@ -17,10 +18,16 @@ use Illuminate\Database\Eloquent\Collection;
     <div class="py-12">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
                 <div class="card text-left">
                     <div class="card-header font-bold">
-                        {{ __('event.show_title') }}
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{ __('event.show_title') }}
+                            </div>
+                            <div class="col-md-9">
+                                @include('components.flash-message')
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
@@ -44,20 +51,49 @@ use Illuminate\Database\Eloquent\Collection;
                             @endforeach
                         </table>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div class="card-footer">
+                        {{ Form::open(['route' => 'user.reservation.store', 'method' => 'post']) }}
+                        @method('POST')
+                        @csrf
+
+                        {{ Form::hidden('user_id', auth()->id()) }}
+                        {{ Form::hidden('event_id', $model->id) }}
+
                         <div class="row">
-                            <div class="col-md-6">
-                                {{ Form::select('number_of_people', [], null, ['class' => 'form-control']) }}
+                            <div class="col-md-3">
+                                <label>{{ __('reservation.attribute_labels.number_of_people') }}</label>
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-dark">
-                                    {{ __('message.btn_labels.reservation') }}
+                            <div class="col-md-3">
+                                @if($available_reserved_event_people === null)
+                                    <span class="alert-danger">
+                                        {{ __('message.common.fill_reservation_people') }}
+                                    </span>
+                                @else
+                                    <select name="number_of_people" class="form-control">
+                                        <option value="">予約人数を選択してください</option>
+                                        @for($i = 1; $i <=$available_reserved_event_people ; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                @endif
+                            </div><div class="col-md-6"></div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="fa-regular fa-id-card"></i>{{ __('message.btn_labels.reservation') }}
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-light" onclick="location.href='{{ route('dashboard') }}'">
+                                    <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
                                 </button>
                             </div>
                         </div>
+                        {{ Form::close() }}
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

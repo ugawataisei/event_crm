@@ -12,5 +12,5 @@ interface EventServiceInterface
 
     public function returnReEventsToSelect(Carbon $selectedDate): Collection;
 
-    public function returnNumOfPeople(Event $model): int;
+    public function returnAvailableReservedEventPeople(Event $model): null|int;
 }

@@ -4,6 +4,7 @@ return [
     'common' => [
         'operation' => '操作',
         'no_reservation_information_yet' => '予約情報がまだありません',
+        'fill_reservation_people' => 'このイベントは予約が満員です',
         'success_update' => '更新しました',
         'success_store' => '保存しました',
         'success_reservation' => '予約しました',
