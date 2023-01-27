@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Collection;
 
 /** @var Event $model */
 /** @var Collection $reservations */
+/** @var Reservation $reservation */
 /** @var null|int $available_reserved_event_people */
 
 ?>
@@ -17,9 +19,11 @@ use Illuminate\Database\Eloquent\Collection;
 
     <div class="py-12">
         <div class="mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
+
+                {{--Event  Info--}}
                 <div class="card text-left">
-                    <div class="card-header font-bold">
+                    <div class="card-header font-bold bg-light">
                         <div class="row">
                             <div class="col-md-3">
                                 {{ __('event.show_title') }}
@@ -65,7 +69,7 @@ use Illuminate\Database\Eloquent\Collection;
                             </div>
                             <div class="col-md-3">
                                 @if($available_reserved_event_people === null)
-                                    <span class="alert-danger">
+                                    <span class="alert alert-danger" role="alert">
                                         {{ __('message.common.fill_reservation_people') }}
                                     </span>
                                 @else
@@ -76,24 +80,64 @@ use Illuminate\Database\Eloquent\Collection;
                                         @endfor
                                     </select>
                                 @endif
-                            </div><div class="col-md-6"></div>
+                            </div>
+                            <div class="col-md-6"></div>
                         </div>
 
                         <div class="row mt-2">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-secondary"
+                                        onclick="location.href='{{ route('dashboard') }}'">
+                                    <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
+                                </button>
+                            </div>
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-dark">
                                     <i class="fa-regular fa-id-card"></i>{{ __('message.btn_labels.reservation') }}
                                 </button>
                             </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-light" onclick="location.href='{{ route('dashboard') }}'">
-                                    <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
-                                </button>
-                            </div>
+                            <div class="col-md-6"></div>
                         </div>
                         {{ Form::close() }}
                     </div>
                 </div>
+
+                {{--Reservation  Info--}}
+                <div class="card text-center mt-5">
+                    <div class="card-header font-bold bg-light">
+                        {{ __('reservation.show_title') }}
+                    </div>
+                    <div class="card-body my-2">
+                        @if($reservations->isNotEmpty())
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">{{ __('reservation.id') }}</th>
+                                    <th scope="col">{{ __('reservation.reservation_user_name') }}</th>
+                                    <th scope="col">{{ __('reservation.number_of_people') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($reservations as $reservation)
+                                    <tr>
+                                        <th scope="row">{{ $reservation->id }}</th>
+                                        <td>{{ $reservation->user_id }}</td>
+                                        <td>{{ $reservation->number_of_people }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <span class="alert alert-dark font-bold" role="alert">
+                                {{ __('message.common.no_reservation_information_yet') }}
+                            </span>
+                        @endif
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
