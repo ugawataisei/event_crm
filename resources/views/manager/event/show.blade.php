@@ -1,12 +1,8 @@
 <?php
 
 use App\Models\Event;
-use App\Models\Reservation;
-use Illuminate\Database\Eloquent\Collection;
 
 /** @var Event $model */
-/** @var Reservation $reservation */
-/** @var Collection $reservations */
 
 ?>
 <x-app-layout>
@@ -17,67 +13,49 @@ use Illuminate\Database\Eloquent\Collection;
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
 
             <div class="card">
-                <div class="card-header text-gray-500 font-bold">
-                    {{ __('event.show_title') }}
+                <div class="card-header bg-light font-bold">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ __('event.show_title') }}
+                        </div>
+                        <div class="col-md-6">
+
+                            @include('components.flash-message', [])
+
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
-                        @include('components.flash-message')
-
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <tr class="border-b border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                    {{ __('event.attribute_labels.name') }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $model->name }}
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                    {{ __('event.attribute_labels.information') }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {!! nl2br($model->information) !!}
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                    {{ __('event.attribute_labels.max_people') }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $model->max_people }}
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                    {{ __('event.attribute_labels.start_date') }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $model->start_date->format('Y年m月d日 h:m') }}
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200">
-                                <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                    {{ __('event.attribute_labels.end_date') }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $model->end_date->format('Y年m月d日 h:m') }}
-                                </td>
-                            </tr>
+                        <table class="table table-hover table-striped">
+                            <caption></caption>
+                            @foreach( __('event.attribute_labels') as $attribute => $transAttribute)
+                                @if($attribute === 'information')
+                                    <tr class="border">
+                                        <th class="border bg-light" scope="col">{{ $transAttribute }}</th>
+                                        <td>{{ nl2br($model->$attribute) }}</td>
+                                    </tr>
+                                @else
+                                    <tr class="border">
+                                        <th class="border bg-light" scope="col">{{ $transAttribute }}</th>
+                                        <td>{{ $model->$attribute }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </table>
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <button type="button" onclick="location.href='{{ route('manager.event.index') }}'"
-                            class="btn btn-light">
+                    <button type="button"
+                            onclick="location.href='{{ route('manager.event.index') }}'"
+                            class="btn btn-secondary">
                         <i class="fa-solid fa-list"></i>{{ __('message.btn_labels.list') }}
                     </button>
-                    <button type="button" onclick="location.href='{{ route('manager.event.edit', ['id' => $model->id]) }}'"
+                    <button type="button"
+                            onclick="location.href='{{ route('manager.event.edit', ['id' => $model->id]) }}'"
                             class="btn btn-success">
                         <i class="fa-solid fa-pen"></i>{{ __('message.btn_labels.edit') }}
                     </button>
@@ -91,61 +69,10 @@ use Illuminate\Database\Eloquent\Collection;
             @include('components.delete-modal', [
                 'title' => __('event.delete_title'),
                 'route' => 'manager.event.delete',
+                'model' => $model,
             ])
 
-            <div class="card mt-5">
-                <div class="card-header text-gray-500 font-bold">
-                    {{ __('reservation.show_title') }}
-                </div>
-                <div class="card-body">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    {{ __('reservation.attribute_labels.reservation_user_name') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    {{ __('reservation.attribute_labels.number_of_people') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    {{ __('reservation.attribute_labels.created_at') }}
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($reservations as $reservation)
-                                @if($reservation !== null)
-                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $reservation->user->name }}
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            {{ $reservation->number_of_people }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $reservation->created_at->format('Y年m月d日 h:m') }}
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ __('message.common.no_reservation_information_yet') }}
-                                        </th>
-                                    </tr>
-                                @endif
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer text-muted">
-                    <button type="button" onclick="location.href='{{ route('user.reservation.create', ['event_id' => $model->id]) }}'"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2">
-                        <i class="fa-regular fa-id-card"></i>{{ __('message.btn_labels.reservation') }}
-                    </button>
-                </div>
-            </div>
+            @include('user.reservation.index', [])
 
         </div>
     </div>

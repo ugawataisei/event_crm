@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Services\EventService;
+use App\Http\Services\LivewireService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Foundation\Application;
@@ -15,24 +15,24 @@ class Calendar extends Component
     public Carbon $selectedDate;
     public array $dayInfoForOneWeekList;
     public Collection $selectedDateReEvents;
-    protected EventService $eventService;
+    protected LivewireService $livewireService;
 
-    public function mount(EventService $eventService)
+    public function mount(LivewireService $livewireService): void
     {
         $this->selectedDate = Carbon::today();
-        $this->eventService = $eventService;
+        $this->livewireService = $livewireService;
 
-        $this->dayInfoForOneWeekList = $eventService->returnDayInfoForOneWeekToSelect($this->selectedDate);
-        $this->selectedDateReEvents = $eventService->returnReEventsToSelect($this->selectedDate);
+        $this->dayInfoForOneWeekList = $livewireService->returnDayInfoForOneWeekToSelect($this->selectedDate);
+        $this->selectedDateReEvents = $livewireService->returnReEventsToSelect($this->selectedDate);
     }
 
-    public function returnOneWeekForSelectedDate(string $selectedDate, EventService $eventService)
+    public function returnOneWeekForSelectedDate(string $selectedDate, LivewireService $livewireService): void
     {
         $this->selectedDate = Carbon::parse($selectedDate);
-        $this->eventService = $eventService;
+        $this->livewireService = $livewireService;
 
-        $this->dayInfoForOneWeekList = $eventService->returnDayInfoForOneWeekToSelect($this->selectedDate);
-        $this->selectedDateReEvents = $eventService->returnReEventsToSelect($this->selectedDate);
+        $this->dayInfoForOneWeekList = $livewireService->returnDayInfoForOneWeekToSelect($this->selectedDate);
+        $this->selectedDateReEvents = $livewireService->returnReEventsToSelect($this->selectedDate);
     }
 
     public function render(): Factory|View|Application

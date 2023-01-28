@@ -4,8 +4,8 @@ use App\Models\Event;
 use App\Consts\EventConst;
 
 /** @var Event $model */
-/** @var int $oldMaxPeopleKey */
-/** @var int $oldIsVisibleKey */
+/** @var int $old_max_people_key */
+/** @var int $old_is_visible_key */
 /** @var string $event_date */
 /** @var string $start_time */
 /** @var string $end_time */
@@ -19,23 +19,30 @@ use App\Consts\EventConst;
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                 <div class="card">
                     <div class="card-header text-muted font-bold">
-                        {{ __('event.edit_title') }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ __('event.edit_title') }}
+                            </div>
+                            <div class="col-md-6">
+
+                                @include('components.flash-message', [])
+
+                                @include('components.validation-error', [])
+
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-
-                        @include('components.flash-message')
-
-                        @include('components.validation-error')
-
                         {{ Form::open(['route' => 'manager.event.update', 'method' => 'post']) }}
+                        @method('POST')
                         @csrf
 
                         {{ Form::hidden('id', $model->id) }}
-
                         <div class="mb-2">
                             {{ Form::label('name', __('event.attribute_labels.name'), ['class' => 'form-label']) }}
                             {{ Form::text('name', $model->name, ['class' => 'form-control']) }}
@@ -60,11 +67,11 @@ use App\Consts\EventConst;
                         </div>
                         <div class="mb-2">
                             {{ Form::label('max_people', __('event.attribute_labels.max_people'), ['class' => 'form-label']) }}
-                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $oldMaxPeopleKey,['class' => 'form-control']) }}
+                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $old_max_people_key,['class' => 'form-control']) }}
                         </div>
                         <div class="mb-2">
                             {{ Form::label('is_visible', __('event.attribute_labels.is_visible'), ['class' => 'form-label']) }}
-                            {{ Form::select('is_visible', EventConst::EVENT_STATUS, $oldIsVisibleKey,['class' => 'form-control']) }}
+                            {{ Form::select('is_visible', EventConst::EVENT_STATUS, $old_is_visible_key,['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="card-footer">
@@ -78,6 +85,7 @@ use App\Consts\EventConst;
                         {{ Form::close() }}
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -3,51 +3,101 @@
 namespace App\Http\Services;
 
 use App\Consts\EventConst;
+use App\Http\Requests\Manager\Event\EventStoreRequest;
+use App\Http\Requests\Manager\Event\EventUpdateRequest;
+use App\Http\Services\Impl\EventServiceInterface;
 use App\Models\Event;
 use App\Models\Reservation;
 use Carbon\Carbon;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
-class EventService
+class EventService implements EventServiceInterface
 {
     /**
-     *
-     * @param Carbon $selectedDate
-     * @return array
+     * @return Collection
      */
-    public function returnDayInfoForOneWeekToSelect(Carbon $selectedDate): array
+    public function getAllEventsAfterToday(): Collection
     {
-        $dayInfoForOneWeekList = [];
-        for ($i = 0; $i < EventConst::AMOUNT_DAYS_IN_ONE_WEEK; $i++) {
-            $dayInfoForOneWeekList['day'][] = $selectedDate->copy()
-                ->addDays($i)->format('m月d日');
-            $dayInfoForOneWeekList['day_name'][] = $selectedDate->copy()
-                ->addDays($i)->dayName;
-            $dayInfoForOneWeekList['day_string'][] = $selectedDate->copy()
-                ->addDays($i)->format('Y-m-d');
-        }
-        return $dayInfoForOneWeekList;
+        return Event::query()->where('is_visible', EventConst::STATUS_DISPLAY)
+            ->whereDate('start_date', '>=', Carbon::now('Asia/Tokyo'))
+            ->get();
     }
 
     /**
-     *
-     * @param Carbon $selectedDate
-     * @return Collection
+     * @param int $id
+     * @return array
      */
-    public function returnReEventsToSelect(Carbon $selectedDate): Collection
+    public function getEventDetails(int $id): array
     {
-        /** @var Builder $reservations */
-        $reservedEventPeople = Reservation::query()
-            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
-            ->groupBy('event_id');
+        /** @var Event $model */
+        $model = Event::query()->findOrFail($id);
 
-        $addSevenDaysDate = $selectedDate->copy()->addDays(EventConst::AMOUNT_DAYS_IN_ONE_WEEK);
-        return Event::query()->leftJoinSub($reservedEventPeople, 'reserved_event_people', function ($join) {
-            $join->on('events.id', '=', 'reserved_event_people.event_id');
-        })->whereBetween('start_date', [$selectedDate, $addSevenDaysDate])
-            ->orderBy('start_date', 'asc')
+        /** @var Collection $reservations */
+        $reservations = Reservation::query()
+            ->where('event_id', $model->id)
+            ->whereNull('canceled_date')
             ->get();
+
+        return [
+            'model' => $model,
+            'reservations' => $reservations,
+        ];
+    }
+
+    /**
+     * @param EventStoreRequest $request
+     * @return Model
+     */
+    public function storeEventByRequest(EventStoreRequest $request): Model
+    {
+        $startDate = $request->get('event_date') . ' ' . $request->get('start_time');
+        $endDate = $request->get('event_date') . ' ' . $request->get('end_time');
+
+        return Event::query()->create([
+            'name' => $request->get('name'),
+            'information' => $request->get('information'),
+            'start_date' => Carbon::parse($startDate),
+            'end_date' => Carbon::parse($endDate),
+            'max_people' => EventConst::MAX_PEOPLE_OPTION[(int)$request->get('max_people')],
+            'is_visible' => $request->get('is_visible'),
+        ]);
+    }
+
+    /**
+     * @param EventUpdateRequest $request
+     * @return Model
+     */
+    public function updateEventByRequest(EventUpdateRequest $request): Model
+    {
+        $startDate = $request->get('event_date') . ' ' . $request->get('start_time');
+        $endDate = $request->get('event_date') . ' ' . $request->get('end_time');
+
+        /** @var Event $model */
+        $model = Event::query()->findOrFail((int)$request->get('id'));
+
+        $model->fill([
+            'name' => $request->get('name'),
+            'information' => $request->get('information'),
+            'start_date' => Carbon::parse($startDate),
+            'end_date' => Carbon::parse($endDate),
+            'max_people' => EventConst::MAX_PEOPLE_OPTION[(int)$request->get('max_people')],
+            'is_visible' => $request->get('is_visible'),
+        ])->save();
+
+        return $model;
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function deleteEventByRequest(Request $request): void
+    {
+        /** @var Event $model */
+        $model = Event::query()->findOrFail($request->get('id'));
+
+        $model->delete();
     }
 }

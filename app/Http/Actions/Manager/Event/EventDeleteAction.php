@@ -3,12 +3,20 @@
 namespace App\Http\Actions\Manager\Event;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Http\Services\EventService;
+use App\Http\Services\Impl\EventServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class EventDeleteAction extends Controller
 {
+    protected EventService $eventService;
+
+    public function __construct(EventServiceInterface $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     /**
      *
      * @param Request $request
@@ -16,17 +24,7 @@ class EventDeleteAction extends Controller
      */
     public function __invoke(Request $request): RedirectResponse
     {
-        /** @var Event $model */
-        $model = Event::query()->findOrFail($request->get('id'));
-
-        if ($model === null) {
-            return redirect()->route('manager.event.index')->with([
-                'status' => 'alert',
-                'message' => trans('message.common.error_actions'),
-            ]);
-        }
-
-        $model->delete();
+        $this->eventService->deleteEventByRequest($request);
 
         return redirect()->route('manager.event.index')->with([
             'status' => 'info',

@@ -25,17 +25,17 @@ use Illuminate\Database\Eloquent\Collection;
                    value="{{ $selectedDate }}"
                    wire:change="returnOneWeekForSelectedDate($event.target.value)">
             <div class="flex pt-5">
+
                 @include('components.calendar.columns')
 
                 @include('components.calendar.rows', [
                     'day_info' => $dayInfoForOneWeekList,
                     'event_list' => $selectedDateReEvents,
                 ])
+
             </div>
         </div>
         <div class="col-md-7"></div>
     </div>
-    <div class="card-footer">
-
-    </div>
+    <div class="card-footer"></div>
 </div>
