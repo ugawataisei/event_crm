@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Services\EventService;
+use App\Http\Services\Impl\EventServiceInterface;
+use App\Http\Services\Impl\ReservationServiceInterface;
+use App\Http\Services\ReservationService;
 use Illuminate\Support\ServiceProvider;
 use Reliese\Coders\CodersServiceProvider;
 
@@ -17,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() === 'local') {
             $this->app->register(CodersServiceProvider::class);
         }
+
+        $this->app->singleton(EventServiceInterface::class, EventService::class);
+        $this->app->singleton(ReservationServiceInterface::class, ReservationService::class);
     }
 
     /**
@@ -24,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }

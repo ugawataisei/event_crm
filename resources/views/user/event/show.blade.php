@@ -52,7 +52,7 @@ use App\Models\Event;
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ Form::open(['route' => 'user.event.reservation', 'method' => 'post']) }}
+                        {{ Form::open(['route' => 'user.reservation.store', 'method' => 'post']) }}
                         @method('POST')
                         @csrf
 

@@ -4,8 +4,8 @@ use App\Models\Event;
 use App\Consts\EventConst;
 
 /** @var Event $model */
-/** @var int $oldMaxPeopleKey */
-/** @var int $oldIsVisibleKey */
+/** @var int $old_max_people_key */
+/** @var int $old_is_visible_key */
 /** @var string $event_date */
 /** @var string $start_time */
 /** @var string $end_time */
@@ -67,11 +67,11 @@ use App\Consts\EventConst;
                         </div>
                         <div class="mb-2">
                             {{ Form::label('max_people', __('event.attribute_labels.max_people'), ['class' => 'form-label']) }}
-                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $oldMaxPeopleKey,['class' => 'form-control']) }}
+                            {{ Form::select('max_people', EventConst::MAX_PEOPLE_OPTION, $old_max_people_key,['class' => 'form-control']) }}
                         </div>
                         <div class="mb-2">
                             {{ Form::label('is_visible', __('event.attribute_labels.is_visible'), ['class' => 'form-label']) }}
-                            {{ Form::select('is_visible', EventConst::EVENT_STATUS, $oldIsVisibleKey,['class' => 'form-control']) }}
+                            {{ Form::select('is_visible', EventConst::EVENT_STATUS, $old_is_visible_key,['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="card-footer">

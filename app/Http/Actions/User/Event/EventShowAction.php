@@ -3,7 +3,8 @@
 namespace App\Http\Actions\User\Event;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\EventService;
+use App\Http\Services\Impl\ReservationServiceInterface;
+use App\Http\Services\ReservationService;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Contracts\View\View;
@@ -12,11 +13,11 @@ use Illuminate\Http\Request;
 
 class EventShowAction extends Controller
 {
-    protected EventService $eventService;
+    protected ReservationService $reservationService;
 
-    public function __construct(EventService $eventService)
+    public function __construct(ReservationServiceInterface $reservationService)
     {
-        $this->eventService = $eventService;
+        $this->reservationService = $reservationService;
     }
 
     /**
@@ -39,7 +40,7 @@ class EventShowAction extends Controller
         $viewParams = [
             'model' => $model,
             'reservations' => $reservations,
-            'available_reserved_event_people' => $this->eventService->returnAvailableReservedEventPeople($model)
+            'available_reserved_event_people' => $this->reservationService->returnAvailableReservedEventPeople($model)
         ];
 
         return view('user.event.show', $viewParams);

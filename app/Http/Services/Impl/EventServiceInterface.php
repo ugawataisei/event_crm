@@ -2,15 +2,21 @@
 
 namespace App\Http\Services\Impl;
 
-use App\Models\Event;
-use Carbon\Carbon;
+use App\Http\Requests\Manager\Event\EventStoreRequest;
+use App\Http\Requests\Manager\Event\EventUpdateRequest;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 interface EventServiceInterface
 {
-    public function returnDayInfoForOneWeekToSelect(Carbon $selectedDate): array;
+    public function getAllEventsAfterToday(): Collection;
 
-    public function returnReEventsToSelect(Carbon $selectedDate): Collection;
+    public function getEventDetails(int $id): array;
 
-    public function returnAvailableReservedEventPeople(Event $model): null|int;
+    public function storeEventByRequest(EventStoreRequest $request): Model;
+
+    public function updateEventByRequest(EventUpdateRequest $request): Model;
+
+    public function deleteEventByRequest(Request $request): void;
 }
