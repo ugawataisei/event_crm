@@ -3,12 +3,21 @@
 namespace App\Http\Actions\User\Reservation;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Impl\ReservationServiceInterface;
+use App\Http\Services\ReservationService;
 use App\Models\Reservation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ReservationDeleteAction extends Controller
 {
+    protected ReservationService $reservationService;
+
+    public function __construct(ReservationServiceInterface $reservationService)
+    {
+        $this->reservationService = $reservationService;
+    }
+
     /**
      *
      * @param Request $request
@@ -17,22 +26,12 @@ class ReservationDeleteAction extends Controller
     public function __invoke(Request $request): RedirectResponse
     {
         /** @var Reservation $model */
-        $model = Reservation::query()
-            ->findOrFail($request->get('id'));
+        $model = $this->reservationService->deleteReservationByRequest($request);
 
-        if ($model === null) {
-            return redirect()->route('user.reservation.create', ['event_id' => $model->event_id])->with([
+        return redirect()->route('user.event.show', ['id' => $model->event_id])
+            ->with([
                 'status' => 'alert',
-                'message' => trans('message.common.error_actions'),
+                'message' => trans('message.common.success_delete'),
             ]);
-        }
-
-        $eventId = $model->event_id;
-        $model->delete();
-
-        return redirect()->route('manager.event.show', ['id' => $eventId])->with([
-            'status' => 'info',
-            'message' => trans('message.common.success_delete'),
-        ]);
     }
 }

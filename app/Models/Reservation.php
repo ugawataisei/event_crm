@@ -47,6 +47,10 @@ class Reservation extends Model
         'canceled_date'
     ];
 
+    /**
+     * Relations
+     */
+
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
@@ -55,5 +59,17 @@ class Reservation extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Accessor
+     */
+
+    public function getUserIdAttribute($value)
+    {
+        /** @var User $user */
+        $user = User::query()->where('id', $value)->first();
+
+        return $user->name;
     }
 }

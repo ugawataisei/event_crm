@@ -28,22 +28,31 @@ use Illuminate\Support\Carbon;
                     }
                 @endphp
                 @if($model)
-                    <div class="border bg-warning font-bold px-5 py-1">
-                        {{ $model->name }}
-                    </div>
+                    {{-- can show event then login --}}
+                    @can('user')
+                        <a href="{{ route('user.event.show', ['id' => $model->id]) }}"
+                           class="border bg-dark font-bold text-white px-5 py-1">{{ $model->name}}
+                        </a>
+                    @endcan
+                    {{-- can not show event then not login --}}
+                    @cannot('user')
+                        <div class="border bg-dark font-bold text-white px-5 py-1">
+                            {{ $model->name }}
+                        </div>
+                    @endcannot
                     @for($i_period = 0; $i_period < $period; $i_period++)
-                        <div class="border bg-warning font-bold px-5 py-1">
+                        <div class="border bg-dark text-white px-5 py-1">
                             {{ 'period' }}
                         </div>
                         @php $i_time++ @endphp
                     @endfor
                 @else
-                    <div class="border px-5 py-1">
+                    <div class="border bg-secondary px-5 py-1">
                         {{ 'empty' }}
                     </div>
                 @endif
             @else
-                <div class="border px-5 py-1">
+                <div class="border bg-secondary px-5 py-1">
                     {{ 'empty' }}
                 </div>
             @endif
