@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventShowAction extends Controller
 {
@@ -37,10 +38,22 @@ class EventShowAction extends Controller
             ->whereNull('canceled_date')
             ->get();
 
+        $isReserved = $this->reservationService->checkReservedEventAuthUser($model);
+
+        if ($isReserved) {
+            /** @var Reservation $reservation */
+            $reservation = Reservation::query()->where('event_id', $id)
+                ->where('user_id', Auth::id())
+                ->whereNull('canceled_date')
+                ->first();
+        }
+
         $viewParams = [
             'model' => $model,
             'reservations' => $reservations,
-            'available_reserved_event_people' => $this->reservationService->returnAvailableReservedEventPeople($model)
+            'available_reserved_event_people' => $this->reservationService->returnAvailableReservedEventPeople($model),
+            'is_reserved' => $isReserved,
+            'reservation' => $reservation ?? null,
         ];
 
         return view('user.event.show', $viewParams);

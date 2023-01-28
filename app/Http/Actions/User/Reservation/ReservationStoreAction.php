@@ -30,9 +30,10 @@ class ReservationStoreAction extends Controller
         /** @var Reservation $model */
         $model = $this->reservationService->storeReservationByRequest($request);
 
-        return redirect()->route('user.event.show', ['id' => $model->id])->with([
-            'status' => 'info',
-            'message' => trans('message.common.success_reservation'),
-        ]);
+        return redirect()->route('user.event.show', ['id' => $model->event_id])
+            ->with([
+                'status' => 'info',
+                'message' => trans('message.common.success_reservation'),
+            ]);
     }
 }
