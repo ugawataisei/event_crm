@@ -56,7 +56,7 @@ use Illuminate\Database\Eloquent\Collection;
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ Form::open(['route' => 'user.reservation.store', 'method' => 'post']) }}
+                        {{ Form::open(['route' => 'user.event.reservation', 'method' => 'post']) }}
                         @method('POST')
                         @csrf
 
@@ -112,9 +112,9 @@ use Illuminate\Database\Eloquent\Collection;
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">{{ __('reservation.id') }}</th>
-                                    <th scope="col">{{ __('reservation.reservation_user_name') }}</th>
-                                    <th scope="col">{{ __('reservation.number_of_people') }}</th>
+                                    <th scope="col">{{ __('reservation.attribute_labels.id') }}</th>
+                                    <th scope="col">{{ __('reservation.attribute_labels.reservation_user_name') }}</th>
+                                    <th scope="col">{{ __('reservation.attribute_labels.number_of_people') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

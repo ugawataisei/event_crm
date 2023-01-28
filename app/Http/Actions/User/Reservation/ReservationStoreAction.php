@@ -7,6 +7,7 @@ use App\Http\Requests\User\Reservation\ReservationStoreRequest;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 
 class ReservationStoreAction extends Controller
@@ -15,12 +16,12 @@ class ReservationStoreAction extends Controller
      *
      * @param ReservationStoreRequest $request
      * @return RedirectResponse
+     * @throws ModelNotFoundException
      */
     public function __invoke(ReservationStoreRequest $request): RedirectResponse
     {
         /** @var Event $event */
-        $event = Event::query()
-            ->findOrFail($request->get('event_id'));
+        $event = Event::query()->findOrFail($request->get('event_id'));
 
         /** @var Collection $reservations */
         $reservations = Reservation::query()
