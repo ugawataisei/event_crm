@@ -22,6 +22,7 @@
 - [alpinejs](https://alpinejs.dev/)
 - [jquery](https://jquery.com/)
 - [flatpickr](https://flatpickr.js.org/)
+- [select2](https://select2.org/)
 
 ## Develop Environment
 
@@ -30,19 +31,23 @@
 ## Directory Structure
 
 ```php
-gift_ec/
+event_crm/
         ┣app/
             └ Console/
             └ Consts/ #define const
             └ Exceptions/
             └ Http/
                   └ Actions/ #Single controller
+                  └ Livewire/ #Livewire controller
                   └ Requests/ #validation check
             └ Jobs/
             └ Mail/
             └ Models/
             └ Providers/
-            └ Services/ #main controller process
+                        └ AppServiceProvider/ #define singleton to Services
+            └ Services/
+                       └ Impl/ #Interface with Service
+                       └ #Services with Actions Controller 
             └ View/
         ┣bootstrap
         ┣config #setting
@@ -55,7 +60,7 @@ gift_ec/
                   └ views/ #blade file      
         ┣routes #define controller route
         ┣storage
-        ┣tests #process test
+        ┣tests #unit test
 ```
 
 ##  Infrastructure

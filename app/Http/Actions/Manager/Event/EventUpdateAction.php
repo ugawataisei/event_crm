@@ -4,9 +4,9 @@ namespace App\Http\Actions\Manager\Event;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\Event\EventUpdateRequest;
-use App\Http\Services\EventService;
-use App\Http\Services\Impl\EventServiceInterface;
 use App\Models\Event;
+use App\Services\EventService;
+use App\Services\Impl\EventServiceInterface;
 use Illuminate\Http\RedirectResponse;
 
 class EventUpdateAction extends Controller
