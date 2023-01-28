@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Impl;
+namespace App\Services\Impl;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;

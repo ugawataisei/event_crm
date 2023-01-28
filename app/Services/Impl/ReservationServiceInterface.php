@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Impl;
+namespace App\Services\Impl;
 
 use App\Http\Requests\User\Reservation\ReservationStoreRequest;
 use App\Http\Requests\User\Reservation\ReservationUpdateRequest;

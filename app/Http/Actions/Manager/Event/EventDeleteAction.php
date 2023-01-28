@@ -3,8 +3,8 @@
 namespace App\Http\Actions\Manager\Event;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\EventService;
-use App\Http\Services\Impl\EventServiceInterface;
+use App\Services\EventService;
+use App\Services\Impl\EventServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 

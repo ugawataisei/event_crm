@@ -4,9 +4,9 @@ namespace App\Http\Actions\User\Reservation;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Reservation\ReservationStoreRequest;
-use App\Http\Services\Impl\ReservationServiceInterface;
-use App\Http\Services\ReservationService;
 use App\Models\Reservation;
+use App\Services\Impl\ReservationServiceInterface;
+use App\Services\ReservationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 

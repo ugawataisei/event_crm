@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Consts\EventConst;
-use App\Http\Services\Impl\LivewireServiceInterface;
 use App\Models\Event;
 use App\Models\Reservation;
+use App\Services\Impl\LivewireServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

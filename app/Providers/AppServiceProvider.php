@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Http\Services\EventService;
-use App\Http\Services\Impl\EventServiceInterface;
-use App\Http\Services\Impl\ReservationServiceInterface;
-use App\Http\Services\ReservationService;
+use App\Services\EventService;
+use App\Services\Impl\EventServiceInterface;
+use App\Services\Impl\ReservationServiceInterface;
+use App\Services\ReservationService;
 use Illuminate\Support\ServiceProvider;
 use Reliese\Coders\CodersServiceProvider;
 

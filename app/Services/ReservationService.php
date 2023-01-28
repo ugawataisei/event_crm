@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Http\Requests\User\Reservation\ReservationStoreRequest;
 use App\Http\Requests\User\Reservation\ReservationUpdateRequest;
-use App\Http\Services\Impl\ReservationServiceInterface;
 use App\Models\Event;
 use App\Models\Reservation;
+use App\Services\Impl\ReservationServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;

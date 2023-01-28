@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Consts\EventConst;
 use App\Http\Requests\Manager\Event\EventStoreRequest;
 use App\Http\Requests\Manager\Event\EventUpdateRequest;
-use App\Http\Services\Impl\EventServiceInterface;
 use App\Models\Event;
 use App\Models\Reservation;
+use App\Services\Impl\EventServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

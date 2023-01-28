@@ -3,10 +3,10 @@
 namespace App\Http\Actions\User\Event;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Impl\ReservationServiceInterface;
-use App\Http\Services\ReservationService;
 use App\Models\Event;
 use App\Models\Reservation;
+use App\Services\Impl\ReservationServiceInterface;
+use App\Services\ReservationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
