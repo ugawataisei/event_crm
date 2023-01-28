@@ -19,23 +19,30 @@ use App\Consts\EventConst;
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                 <div class="card">
                     <div class="card-header text-muted font-bold">
-                        {{ __('event.edit_title') }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ __('event.edit_title') }}
+                            </div>
+                            <div class="col-md-6">
+
+                                @include('components.flash-message', [])
+
+                                @include('components.validation-error', [])
+
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-
-                        @include('components.flash-message')
-
-                        @include('components.validation-error')
-
                         {{ Form::open(['route' => 'manager.event.update', 'method' => 'post']) }}
+                        @method('POST')
                         @csrf
 
                         {{ Form::hidden('id', $model->id) }}
-
                         <div class="mb-2">
                             {{ Form::label('name', __('event.attribute_labels.name'), ['class' => 'form-label']) }}
                             {{ Form::text('name', $model->name, ['class' => 'form-control']) }}
@@ -78,6 +85,7 @@ use App\Consts\EventConst;
                         {{ Form::close() }}
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

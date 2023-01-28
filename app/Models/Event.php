@@ -68,9 +68,9 @@ class Event extends Model
     public function returnStatusWithBadge(): string
     {
         if ((int)$this->is_visible === EventConst::STATUS_DISPLAY) {
-            return '<span class="badge bg-primary">' . EventConst::MB_STATUS_DISPLAY . '</span>';
+            return '<span class="badge bg-dark">' . EventConst::MB_STATUS_DISPLAY . '</span>';
         } else {
-            return '<span class="badge bg-secondary">' . EventConst::MB_STATUS_DISPLAY . '</span>';
+            return '<span class="badge bg-secondary">' . EventConst::MB_STATUS_HIDDEN . '</span>';
         }
     }
 }

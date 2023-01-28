@@ -23,6 +23,6 @@ return [
         'reservation' => '予約',
         'login' => 'ログイン',
         'register' => '登録',
-        'dashboard' => 'ダッシュボード'
+        'calendar' => 'カレンダー'
     ],
 ];

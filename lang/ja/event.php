@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'イベント管理',
+    'title' => 'イベント一覧',
     'show_title' => 'イベント詳細',
     'edit_title' => 'イベント編集',
     'create_title' => 'イベント作成',

@@ -11,18 +11,25 @@ use App\Consts\EventConst;
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                 <div class="card">
                     <div class="card-header text-muted font-bold">
-                        {{ __('event.create_title') }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ __('event.edit_title') }}
+                            </div>
+                            <div class="col-md-6">
+
+                                @include('components.flash-message', [])
+
+                                @include('components.validation-error', [])
+
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-
-                        @include('components.flash-message')
-
-                        @include('components.validation-error')
-
                         {{ Form::open(['route' => 'manager.event.store', 'method' => 'post']) }}
                         @method('POST')
                         @csrf
@@ -62,12 +69,13 @@ use App\Consts\EventConst;
                         <button class="btn btn-secondary" type="button" onclick="location.href='{{ route('manager.event.index') }}'">
                             <i class="fa-solid fa-reply"></i>{{ __('message.btn_labels.back') }}
                         </button>
-                        <button class="btn btn-info text-white" type="submit">
+                        <button class="btn btn-success text-white" type="submit">
                             <i class="fa-solid fa-plus"></i>{{ __('message.btn_labels.store') }}
                         </button>
                         {{ Form::close() }}
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
