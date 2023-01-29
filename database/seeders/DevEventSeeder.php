@@ -28,6 +28,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addHours(10),
                 'end_date' => $this->today->addHours(13),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event2',
@@ -36,6 +37,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(1)->addHours(12),
                 'end_date' => $this->today->addDays(1)->addHours(15),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event3',
@@ -44,6 +46,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(2)->addHours(10),
                 'end_date' => $this->today->addDays(2)->addHours(11),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event4',
@@ -52,6 +55,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(3)->addHours(11),
                 'end_date' => $this->today->addDays(3)->addHours(14),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event5',
@@ -60,6 +64,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(4)->addHours(10),
                 'end_date' => $this->today->addDays(4)->addHours(13),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event6',
@@ -68,6 +73,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(6)->addHours(15),
                 'end_date' => $this->today->addDays(6)->addHours(18),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
             [
                 'name' => 'event7',
@@ -76,6 +82,7 @@ class DevEventSeeder extends Seeder
                 'start_date' => $this->today->addDays(8)->addHours(9),
                 'end_date' => $this->today->addDays(8)->addHours(13),
                 'is_visible' => EventConst::STATUS_DISPLAY,
+                'created_at' => CarbonImmutable::now(),
             ],
         ]);
     }
