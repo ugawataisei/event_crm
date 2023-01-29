@@ -3,18 +3,18 @@
 namespace App\Http\Actions\User\MyPage;
 
 use App\Http\Controllers\Controller;
-use App\Services\EventService;
-use App\Services\Impl\EventServiceInterface;
+use App\Services\MyPageService;
+use App\Services\Impl\MyPageServiceInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class MyPageIndexAction extends Controller
 {
-    protected EventService $eventService;
+    protected MyPageService $myPageService;
 
-    public function __construct(EventServiceInterface $eventService)
+    public function __construct(MyPageServiceInterface $myPageService)
     {
-        $this->eventService = $eventService;
+        $this->myPageService = $myPageService;
     }
 
     /**
@@ -24,8 +24,8 @@ class MyPageIndexAction extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $models = $this->eventService->getAllEventsAfterToday();
+        $reservedEvents = $this->myPageService->getAllReservedEvents();
 
-        return view('manager.event.index', compact('models'));
+        return view('user.my-page.index', compact('reservedEvents'));
     }
 }
