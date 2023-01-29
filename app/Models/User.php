@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $updated_at
  *
  * @property Collection|Reservation[] $reservations
+ * @property Collection|Event[] events
  *
  * @package App\Models
  */
@@ -67,8 +69,24 @@ class User extends Authenticatable
         'profile_photo_path'
     ];
 
+    /**
+     * Relations
+     */
+
+    /**
+     * @return HasMany
+     */
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'reservations', 'user_id', 'event_id')
+            ->withPivot('user_id', 'event_id', 'number_of_people', 'canceled_date');
     }
 }

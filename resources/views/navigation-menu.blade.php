@@ -19,6 +19,14 @@
                     </x-jet-nav-link>
                 </div>
 
+                @can('user')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('user.my_page.index') }}" :active="request()->routeIs('user.my_page.index')">
+                            {{ __('my-page.title') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+
                 @can('manager')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('manager.event.index') }}" :active="request()->routeIs('manager.event.index')">
@@ -152,6 +160,14 @@
                 {{ __('calendar.title') }}
             </x-jet-responsive-nav-link>
         </div>
+
+        @can('user')
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-jet-nav-link href="{{ route('user.my_page.index') }}" :active="request()->routeIs('user.my_page.index')">
+                    {{ __('my-page.title') }}
+                </x-jet-nav-link>
+            </div>
+        @endcan
 
         @can('manager')
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
