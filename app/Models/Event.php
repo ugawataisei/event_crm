@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $updated_at
  *
  * @property Collection|Reservation[] $reservations
+ * @property Reservation $pivot
  *
  * @package App\Models
  */
@@ -69,8 +70,8 @@ class Event extends Model
     {
         if ((int)$this->is_visible === EventConst::STATUS_DISPLAY) {
             return '<span class="badge bg-dark">' . EventConst::MB_STATUS_DISPLAY . '</span>';
-        } else {
-            return '<span class="badge bg-secondary">' . EventConst::MB_STATUS_HIDDEN . '</span>';
         }
+
+        return '<span class="badge bg-secondary">' . EventConst::MB_STATUS_HIDDEN . '</span>';
     }
 }
