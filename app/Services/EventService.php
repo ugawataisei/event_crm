@@ -11,6 +11,7 @@ use App\Services\Impl\EventServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class EventService implements EventServiceInterface
@@ -47,14 +48,35 @@ class EventService implements EventServiceInterface
     }
 
     /**
-     * @Todo: Date 2023/01/29 Author Ugawa Taisei Comment then store event without duplication time
-     * @param EventStoreRequest $request
-     * @return Model
+     * @param EventUpdateRequest|EventStoreRequest $request
+     * @param string $startDate
+     * @param string $endDate
+     * @return bool
      */
-    public function storeEventByRequest(EventStoreRequest $request): Model
+    public function checkDuplicationEventTime(EventUpdateRequest|EventStoreRequest $request, string $startDate, string $endDate): bool
+    {
+        /** @var Event $model */
+        $duplicationEventStartDate = Event::query()->where('start_date', '<=', $endDate)->get();
+        $duplicationEventEndDate = Event::query()->where('end_date', '>=', $startDate)->get();
+
+        return $duplicationEventStartDate->isNotEmpty() || $duplicationEventEndDate->isNotEmpty();
+    }
+
+    /**
+     * @param EventStoreRequest $request
+     * @return Model|RedirectResponse
+     */
+    public function storeEventByRequest(EventStoreRequest $request): Model|RedirectResponse
     {
         $startDate = $request->get('event_date') . ' ' . $request->get('start_time');
         $endDate = $request->get('event_date') . ' ' . $request->get('end_time');
+
+        if ($this->checkDuplicationEventTime($request, $startDate, $endDate)) {
+            return redirect()->route('manager.event.edit', ['id' => $request->get('id')])->with([
+                'status' => 'alert',
+                'message' => trans('message.common.error_actions')
+            ]);
+        }
 
         return Event::query()->create([
             'name' => $request->get('name'),
@@ -67,17 +89,23 @@ class EventService implements EventServiceInterface
     }
 
     /**
-     * @Todo: Date 2023/01/29 Author Ugawa Taisei Comment then update event without duplication time
      * @param EventUpdateRequest $request
-     * @return Model
+     * @return Model|RedirectResponse
      */
-    public function updateEventByRequest(EventUpdateRequest $request): Model
+    public function updateEventByRequest(EventUpdateRequest $request): Model|RedirectResponse
     {
         $startDate = $request->get('event_date') . ' ' . $request->get('start_time');
         $endDate = $request->get('event_date') . ' ' . $request->get('end_time');
 
         /** @var Event $model */
         $model = Event::query()->findOrFail((int)$request->get('id'));
+
+        if ($this->checkDuplicationEventTime($request, $startDate, $endDate)) {
+            return redirect()->route('manager.event.edit', ['id' => $request->get('id')])->with([
+                'status' => 'alert',
+                'message' => trans('message.common.error_actions')
+            ]);
+        }
 
         $model->fill([
             'name' => $request->get('name'),
